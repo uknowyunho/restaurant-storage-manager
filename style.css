@@ -1,0 +1,435 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Form Section */
+.form-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-section h2 {
+    margin-bottom: 25px;
+    color: #667eea;
+    font-size: 1.8rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Image Upload and Preview */
+.image-upload-button {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+}
+
+.image-upload-button:hover {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.upload-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.image-upload-button::after {
+    content: 'Add Photo';
+    font-size: 0.75rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.image-preview {
+    position: relative;
+    display: inline-block;
+}
+
+.image-preview img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    display: block;
+}
+
+.btn-remove-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-remove-image:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-edit {
+    background: #28a745;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #218838;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+/* List Section */
+.list-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.list-header h2 {
+    color: #667eea;
+    font-size: 1.8rem;
+}
+
+.search-box input {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 300px;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Restaurant Grid */
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.restaurant-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+}
+
+.card-image {
+    margin: -20px -20px 20px -20px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.card-header h3 {
+    color: #333;
+    font-size: 1.4rem;
+    flex: 1;
+}
+
+.cuisine-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.card-body {
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.info-row .icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.info-row span:last-child {
+    color: #555;
+    line-height: 1.5;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 2px solid #dee2e6;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .list-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section,
+    .list-section {
+        padding: 20px;
+    }
+
+    /* Mobile-specific input improvements */
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    .search-box input {
+        font-size: 16px;
+    }
+
+    /* Better touch targets for mobile */
+    .image-upload-button {
+        width: 100%;
+        max-width: 150px;
+        height: 150px;
+    }
+
+    .upload-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .form-section,
+    .list-section {
+        padding: 15px;
+    }
+
+    .card-image img {
+        height: 180px;
+    }
+}
