@@ -229,11 +229,18 @@ createApp({
             // Set up real-time listener for Firebase
             this.unsubscribe = db.collection('restaurants').onSnapshot((snapshot) => {
                 const restaurants = [];
+                const seenIds = new Set();
+
                 snapshot.forEach((doc) => {
-                    restaurants.push(doc.data());
+                    const data = doc.data();
+                    // Prevent duplicates by checking ID
+                    if (!seenIds.has(data.id)) {
+                        seenIds.add(data.id);
+                        restaurants.push(data);
+                    }
                 });
 
-                // Sort by creation date
+                // Sort by creation date (newest first)
                 restaurants.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
                 this.restaurants = restaurants;
