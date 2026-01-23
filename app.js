@@ -1,12 +1,11 @@
 // Firebase Configuration
-// Replace these with your Firebase project credentials from Firebase Console
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyAhw8RTEeQy_QPIkE0H2-7udkNj8V-Lrd4",
+    authDomain: "restaurant-manager-13f99.firebaseapp.com",
+    projectId: "restaurant-manager-13f99",
+    storageBucket: "restaurant-manager-13f99.firebasestorage.app",
+    messagingSenderId: "746415811496",
+    appId: "1:746415811496:web:defbd5825703d43cac4b9d"
 };
 
 // Initialize Firebase
