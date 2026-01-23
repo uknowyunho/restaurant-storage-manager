@@ -87,14 +87,15 @@ createApp({
                         alert('Error updating restaurant. Please try again.');
                         return;
                     }
-                }
-
-                const index = this.restaurants.findIndex(r => r.id === this.editingId);
-                if (index !== -1) {
-                    this.restaurants[index] = {
-                        ...this.restaurants[index],
-                        ...restaurantData
-                    };
+                } else {
+                    // Update local array only when not using Firebase
+                    const index = this.restaurants.findIndex(r => r.id === this.editingId);
+                    if (index !== -1) {
+                        this.restaurants[index] = {
+                            ...this.restaurants[index],
+                            ...restaurantData
+                        };
+                    }
                 }
             } else {
                 // Add new restaurant
@@ -113,13 +114,16 @@ createApp({
                         alert('Error adding restaurant. Please try again.');
                         return;
                     }
+                } else {
+                    // Add to local array only when not using Firebase
+                    this.restaurants.push(newRestaurant);
                 }
-
-                this.restaurants.push(newRestaurant);
             }
 
             // Save to localStorage as backup
-            this.saveToLocalStorage();
+            if (!useFirebase) {
+                this.saveToLocalStorage();
+            }
             this.resetForm();
         },
         editRestaurant(restaurant) {
@@ -170,10 +174,11 @@ createApp({
                         alert('Error deleting restaurant. Please try again.');
                         return;
                     }
+                } else {
+                    // Update local array only when not using Firebase
+                    this.restaurants = this.restaurants.filter(r => r.id !== id);
+                    this.saveToLocalStorage();
                 }
-
-                this.restaurants = this.restaurants.filter(r => r.id !== id);
-                this.saveToLocalStorage();
 
                 // If we're editing this restaurant, reset the form
                 if (this.editingId === id) {
