@@ -427,6 +427,18 @@ header p {
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .form-section h2 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    .form-actions {
+        margin-top: 15px;
+        gap: 10px;
     }
 
     .list-header {
@@ -442,7 +454,11 @@ header p {
         grid-template-columns: 1fr;
     }
 
-    .form-section,
+    .form-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
     .list-section {
         padding: 20px;
     }
@@ -457,15 +473,15 @@ header p {
 
     /* Better touch targets for mobile */
     .images-container {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
     }
 
     .image-upload-button {
-        width: 100px;
-        height: 100px;
-        min-width: 100px;
-        min-height: 100px;
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        min-height: 80px;
         display: flex !important;
         flex-shrink: 0;
     }
@@ -475,22 +491,30 @@ header p {
     }
 
     .upload-icon {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .image-count {
         top: 0;
         left: 0;
         transform: none;
-        font-size: 0.65rem;
-        padding: 2px 5px;
-        border-radius: 8px 0 8px 0;
+        font-size: 0.6rem;
+        padding: 2px 4px;
+        border-radius: 6px 0 6px 0;
     }
 
     .image-preview {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn-remove-image {
+        width: 24px;
+        height: 24px;
+        font-size: 0.85rem;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .card-images-gallery {

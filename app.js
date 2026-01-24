@@ -154,7 +154,19 @@ createApp({
             if (!useFirebase) {
                 this.saveToLocalStorage();
             }
+
+            // Scroll to restaurant list after adding (not editing)
+            const wasEditing = this.editingId !== null;
             this.resetForm();
+
+            if (!wasEditing) {
+                this.$nextTick(() => {
+                    const listSection = document.querySelector('.list-section');
+                    if (listSection) {
+                        listSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            }
         },
         editRestaurant(restaurant) {
             this.editingId = restaurant.id;
