@@ -139,8 +139,8 @@ header p {
 
 .image-count {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
+    top: 8px;
+    left: 8px;
     background: #667eea;
     color: white;
     font-size: 0.7rem;
@@ -476,9 +476,9 @@ header p {
     }
 
     .image-count {
-        bottom: 50%;
-        right: 50%;
-        transform: translate(50%, 50%);
+        top: 8px;
+        left: 8px;
+        transform: none;
         font-size: 0.8rem;
         padding: 3px 8px;
     }
