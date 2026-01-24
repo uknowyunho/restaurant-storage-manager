@@ -52,17 +52,14 @@ createApp({
     },
     computed: {
         filteredRestaurants() {
-            // Only show restaurants when a category is selected
-            if (!this.selectedCuisine) {
-                return [];
-            }
-
             let filtered = this.restaurants;
 
-            // Filter by cuisine
-            filtered = filtered.filter(restaurant =>
-                restaurant.cuisine.toLowerCase() === this.selectedCuisine.toLowerCase()
-            );
+            // Filter by cuisine if selected
+            if (this.selectedCuisine) {
+                filtered = filtered.filter(restaurant =>
+                    restaurant.cuisine.toLowerCase() === this.selectedCuisine.toLowerCase()
+                );
+            }
 
             // Filter by search query if present
             if (this.searchQuery) {
@@ -75,6 +72,9 @@ createApp({
                         (restaurant.notes && restaurant.notes.toLowerCase().includes(query))
                     );
                 });
+            } else if (!this.selectedCuisine) {
+                // Only show empty when both search and category are not active
+                return [];
             }
 
             return filtered;
