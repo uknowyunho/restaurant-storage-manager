@@ -79,6 +79,18 @@ createApp({
                 updatedAt: new Date().toISOString()
             };
 
+            // Check document size for Firebase (1MB limit)
+            if (useFirebase) {
+                const docSize = new Blob([JSON.stringify(restaurantData)]).size;
+                const maxSize = 1048576; // 1MB in bytes
+
+                if (docSize > maxSize) {
+                    const sizeMB = (docSize / 1048576).toFixed(2);
+                    alert(`Data size (${sizeMB}MB) exceeds Firebase's 1MB limit. Please reduce the number of images or use smaller images.`);
+                    return;
+                }
+            }
+
             if (this.editingId) {
                 // Update existing restaurant
                 if (useFirebase) {
@@ -86,7 +98,15 @@ createApp({
                         await db.collection('restaurants').doc(String(this.editingId)).update(restaurantData);
                     } catch (error) {
                         console.error('Error updating restaurant:', error);
-                        alert('Error updating restaurant. Please try again.');
+                        console.error('Error details:', error.code, error.message);
+
+                        if (error.code === 'permission-denied') {
+                            alert('Permission denied. Please check your Firebase security rules.');
+                        } else if (error.message && error.message.includes('maximum size')) {
+                            alert('Data size exceeds Firebase limit. Please use smaller images or fewer images.');
+                        } else {
+                            alert(`Error updating restaurant: ${error.message || 'Please try again.'}`);
+                        }
                         return;
                     }
                 } else {
@@ -113,7 +133,15 @@ createApp({
                         await db.collection('restaurants').doc(String(newId)).set(newRestaurant);
                     } catch (error) {
                         console.error('Error adding restaurant:', error);
-                        alert('Error adding restaurant. Please try again.');
+                        console.error('Error details:', error.code, error.message);
+
+                        if (error.code === 'permission-denied') {
+                            alert('Permission denied. Please check your Firebase security rules.');
+                        } else if (error.message && error.message.includes('maximum size')) {
+                            alert('Data size exceeds Firebase limit. Please use smaller images or fewer images.');
+                        } else {
+                            alert(`Error adding restaurant: ${error.message || 'Please try again.'}`);
+                        }
                         return;
                     }
                 } else {
@@ -154,12 +182,22 @@ createApp({
                 return;
             }
 
+            // Recommended size for Firebase: smaller images
+            const recommendedSize = useFirebase ? 200 * 1024 : 5 * 1024 * 1024; // 200KB for Firebase, 5MB for local
+            const maxSize = 5 * 1024 * 1024; // 5MB absolute max
+
             // Process each file
             Array.from(files).forEach((file) => {
-                // Check file size (limit to 5MB)
-                if (file.size > 5 * 1024 * 1024) {
+                // Check file size
+                if (file.size > maxSize) {
                     alert(`Image "${file.name}" is larger than 5MB and will be skipped`);
                     return;
+                }
+
+                // Warn about large files when using Firebase
+                if (useFirebase && file.size > recommendedSize) {
+                    const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+                    console.warn(`Image "${file.name}" (${sizeMB}MB) may cause issues with Firebase. Consider using smaller images.`);
                 }
 
                 const reader = new FileReader();
