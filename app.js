@@ -241,6 +241,11 @@ createApp({
         removeImage(index) {
             this.form.images.splice(index, 1);
         },
+        triggerImageUpload() {
+            if (this.$refs.imageInput) {
+                this.$refs.imageInput.click();
+            }
+        },
         openLightbox(image) {
             this.lightboxImage = image;
             this.showLightbox = true;

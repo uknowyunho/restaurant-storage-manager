@@ -108,12 +108,13 @@
                             id="image"
                             @change="handleImageUpload"
                             accept="image/*"
+                            capture="environment"
                             ref="imageInput"
                             multiple
                             style="display: none;"
                         >
                         <div class="images-container">
-                            <div v-if="form.images.length < 5" class="image-upload-button" @click="() => $refs.imageInput && $refs.imageInput.click()">
+                            <div v-if="form.images.length < 5" class="image-upload-button" @click="triggerImageUpload">
                                 <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect width="24" height="24" rx="4" fill="#5B9FFF"/>
                                     <circle cx="16" cy="7" r="2" fill="white"/>
