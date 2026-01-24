@@ -476,11 +476,11 @@ header p {
     }
 
     .image-count {
-        top: 8px;
-        left: 8px;
+        top: 6px;
+        left: 6px;
         transform: none;
-        font-size: 0.8rem;
-        padding: 3px 8px;
+        font-size: 0.65rem;
+        padding: 2px 5px;
     }
 
     .image-preview {
