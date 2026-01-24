@@ -163,6 +163,37 @@
                     </div>
                 </div>
 
+                <div class="cuisine-filters">
+                    <button
+                        class="cuisine-filter-btn"
+                        :class="{ active: selectedCuisine === 'Chinese' }"
+                        @click="filterByCuisine('Chinese')"
+                    >
+                        🥡 Chinese
+                    </button>
+                    <button
+                        class="cuisine-filter-btn"
+                        :class="{ active: selectedCuisine === 'Korean' }"
+                        @click="filterByCuisine('Korean')"
+                    >
+                        🍜 Korean
+                    </button>
+                    <button
+                        class="cuisine-filter-btn"
+                        :class="{ active: selectedCuisine === 'Western' }"
+                        @click="filterByCuisine('Western')"
+                    >
+                        🍔 Western
+                    </button>
+                    <button
+                        class="cuisine-filter-btn"
+                        :class="{ active: selectedCuisine === 'Japanese' }"
+                        @click="filterByCuisine('Japanese')"
+                    >
+                        🍱 Japanese
+                    </button>
+                </div>
+
                 <div v-if="filteredRestaurants.length === 0" class="empty-state">
                     <p>{{ searchQuery ? 'No restaurants found.' : 'No restaurants added yet. Add your first restaurant above!' }}</p>
                 </div>

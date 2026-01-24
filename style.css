@@ -304,6 +304,40 @@ header p {
     border-color: #667eea;
 }
 
+/* Cuisine Filters */
+.cuisine-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.cuisine-filter-btn {
+    padding: 8px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    background: white;
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.cuisine-filter-btn:hover {
+    border-color: #667eea;
+    background: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+.cuisine-filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
 /* Restaurant Grid */
 .restaurant-grid {
     display: grid;
@@ -536,6 +570,16 @@ header p {
     .card-images-gallery {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         margin: -15px -15px 15px -15px;
+    }
+
+    .cuisine-filters {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .cuisine-filter-btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
     }
 }
 

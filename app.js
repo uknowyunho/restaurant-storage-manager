@@ -44,6 +44,7 @@ createApp({
             },
             editingId: null,
             searchQuery: '',
+            selectedCuisine: '',
             unsubscribe: null,
             showLightbox: false,
             lightboxImage: ''
@@ -51,18 +52,29 @@ createApp({
     },
     computed: {
         filteredRestaurants() {
-            if (!this.searchQuery) {
-                return this.restaurants;
-            }
-            const query = this.searchQuery.toLowerCase();
-            return this.restaurants.filter(restaurant => {
-                return (
-                    restaurant.name.toLowerCase().includes(query) ||
-                    restaurant.cuisine.toLowerCase().includes(query) ||
-                    (restaurant.address && restaurant.address.toLowerCase().includes(query)) ||
-                    (restaurant.notes && restaurant.notes.toLowerCase().includes(query))
+            let filtered = this.restaurants;
+
+            // Filter by cuisine if selected
+            if (this.selectedCuisine) {
+                filtered = filtered.filter(restaurant =>
+                    restaurant.cuisine.toLowerCase() === this.selectedCuisine.toLowerCase()
                 );
-            });
+            }
+
+            // Filter by search query
+            if (this.searchQuery) {
+                const query = this.searchQuery.toLowerCase();
+                filtered = filtered.filter(restaurant => {
+                    return (
+                        restaurant.name.toLowerCase().includes(query) ||
+                        restaurant.cuisine.toLowerCase().includes(query) ||
+                        (restaurant.address && restaurant.address.toLowerCase().includes(query)) ||
+                        (restaurant.notes && restaurant.notes.toLowerCase().includes(query))
+                    );
+                });
+            }
+
+            return filtered;
         }
     },
     methods: {
@@ -245,6 +257,9 @@ createApp({
         closeLightbox() {
             this.showLightbox = false;
             this.lightboxImage = '';
+        },
+        filterByCuisine(cuisine) {
+            this.selectedCuisine = this.selectedCuisine === cuisine ? '' : cuisine;
         },
         async deleteRestaurant(id) {
             if (confirm('Are you sure you want to delete this restaurant?')) {
