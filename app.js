@@ -233,16 +233,24 @@ createApp({
             if (stored) {
                 try {
                     this.restaurants = JSON.parse(stored);
+                    let needsUpdate = false;
+
                     // Backward compatibility: convert old 'image' field to 'images' array
                     this.restaurants = this.restaurants.map(restaurant => {
                         if (restaurant.image && !restaurant.images) {
                             restaurant.images = [restaurant.image];
                             delete restaurant.image;
+                            needsUpdate = true;
                         } else if (!restaurant.images) {
                             restaurant.images = [];
                         }
                         return restaurant;
                     });
+
+                    // Save back to localStorage if we migrated any old data
+                    if (needsUpdate) {
+                        this.saveToLocalStorage();
+                    }
                 } catch (e) {
                     console.error('Error loading restaurants from localStorage:', e);
                     this.restaurants = [];
@@ -270,6 +278,12 @@ createApp({
                         if (data.image && !data.images) {
                             data.images = [data.image];
                             delete data.image;
+
+                            // Update Firebase document with new format
+                            db.collection('restaurants').doc(String(data.id)).update({
+                                images: data.images,
+                                image: firebase.firestore.FieldValue.delete()
+                            }).catch(err => console.error('Error migrating image field:', err));
                         } else if (!data.images) {
                             data.images = [];
                         }
