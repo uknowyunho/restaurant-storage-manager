@@ -215,18 +215,10 @@ createApp({
                 return;
             }
 
-            const maxSize = 5 * 1024 * 1024; // 5MB absolute max
-
             // Process each file
             for (const file of Array.from(files)) {
-                // Check file size
-                if (file.size > maxSize) {
-                    alert(`Image "${file.name}" is larger than 5MB and will be skipped`);
-                    continue;
-                }
-
                 try {
-                    // Compress image automatically
+                    // Compress image automatically (handles all sizes)
                     const compressedImage = await this.compressImage(file, 800, 0.7);
                     this.form.images.push(compressedImage);
                 } catch (error) {
