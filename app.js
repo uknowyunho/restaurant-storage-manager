@@ -40,7 +40,7 @@ createApp({
                 rating: '',
                 priceRange: '',
                 notes: '',
-                image: ''
+                images: []
             },
             editingId: null,
             searchQuery: '',
@@ -73,7 +73,7 @@ createApp({
                 rating: this.form.rating,
                 priceRange: this.form.priceRange,
                 notes: this.form.notes,
-                image: this.form.image,
+                images: this.form.images,
                 updatedAt: new Date().toISOString()
             };
 
@@ -136,33 +136,42 @@ createApp({
                 rating: restaurant.rating || '',
                 priceRange: restaurant.priceRange || '',
                 notes: restaurant.notes || '',
-                image: restaurant.image || ''
+                images: restaurant.images || []
             };
             // Scroll to form
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
+            const files = event.target.files;
+            if (files.length === 0) return;
+
+            // Check if adding these files would exceed the 5 image limit
+            if (this.form.images.length + files.length > 5) {
+                alert(`You can only upload up to 5 images. You currently have ${this.form.images.length} image(s).`);
+                event.target.value = '';
+                return;
+            }
+
+            // Process each file
+            Array.from(files).forEach((file) => {
                 // Check file size (limit to 5MB)
                 if (file.size > 5 * 1024 * 1024) {
-                    alert('Image size should be less than 5MB');
-                    event.target.value = '';
+                    alert(`Image "${file.name}" is larger than 5MB and will be skipped`);
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    this.form.image = e.target.result;
+                    this.form.images.push(e.target.result);
                 };
                 reader.readAsDataURL(file);
-            }
+            });
+
+            // Clear the input so the same file can be selected again
+            event.target.value = '';
         },
-        removeImage() {
-            this.form.image = '';
-            if (this.$refs.imageInput) {
-                this.$refs.imageInput.value = '';
-            }
+        removeImage(index) {
+            this.form.images.splice(index, 1);
         },
         async deleteRestaurant(id) {
             if (confirm('Are you sure you want to delete this restaurant?')) {
@@ -195,7 +204,7 @@ createApp({
                 rating: '',
                 priceRange: '',
                 notes: '',
-                image: ''
+                images: []
             };
             this.editingId = null;
             // Clear file input
