@@ -44,7 +44,9 @@ createApp({
             },
             editingId: null,
             searchQuery: '',
-            unsubscribe: null
+            unsubscribe: null,
+            showLightbox: false,
+            lightboxImage: ''
         };
     },
     computed: {
@@ -172,6 +174,14 @@ createApp({
         },
         removeImage(index) {
             this.form.images.splice(index, 1);
+        },
+        openLightbox(image) {
+            this.lightboxImage = image;
+            this.showLightbox = true;
+        },
+        closeLightbox() {
+            this.showLightbox = false;
+            this.lightboxImage = '';
         },
         async deleteRestaurant(id) {
             if (confirm('Are you sure you want to delete this restaurant?')) {

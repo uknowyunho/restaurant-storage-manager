@@ -122,11 +122,11 @@
                                 <span class="image-count">{{ form.images.length }}/5</span>
                             </div>
                             <div v-for="(image, index) in form.images" :key="index" class="image-preview">
-                                <img :src="image" alt="Preview">
+                                <img :src="image" alt="Preview" @click="openLightbox(image)">
                                 <button
                                     type="button"
                                     class="btn-remove-image"
-                                    @click="removeImage(index)"
+                                    @click.stop="removeImage(index)"
                                 >
                                     ✕
                                 </button>
@@ -175,7 +175,7 @@
                     >
                         <div v-if="restaurant.images && restaurant.images.length > 0" class="card-images-gallery">
                             <div v-for="(image, index) in restaurant.images" :key="index" class="card-image">
-                                <img :src="image" :alt="restaurant.name">
+                                <img :src="image" :alt="restaurant.name" @click="openLightbox(image)" style="cursor: pointer;">
                             </div>
                         </div>
 
@@ -224,6 +224,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Image Lightbox Modal -->
+        <div v-if="showLightbox" class="image-lightbox" @click="closeLightbox">
+            <button class="lightbox-close" @click="closeLightbox">✕</button>
+            <img :src="lightboxImage" alt="Enlarged view" @click.stop>
         </div>
     </div>
 
