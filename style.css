@@ -272,6 +272,8 @@ header p {
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .list-header {
@@ -305,7 +307,7 @@ header p {
 /* Restaurant Grid */
 .restaurant-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
     gap: 25px;
     max-width: 100%;
 }
@@ -316,6 +318,8 @@ header p {
     padding: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
     border: 2px solid transparent;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .restaurant-card:hover {
@@ -531,6 +535,7 @@ header p {
 
     .card-images-gallery {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        margin: -15px -15px 15px -15px;
     }
 }
 
@@ -558,6 +563,7 @@ header p {
 
     .card-images-gallery {
         grid-template-columns: 1fr;
+        margin: -15px -15px 15px -15px;
     }
 }
 
