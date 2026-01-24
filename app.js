@@ -171,7 +171,40 @@ createApp({
             // Scroll to form
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
-        handleImageUpload(event) {
+        compressImage(file, maxWidth = 800, quality = 0.7) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Resize if larger than maxWidth
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Convert to base64 with compression
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedDataUrl);
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        },
+        async handleImageUpload(event) {
             const files = event.target.files;
             if (files.length === 0) return;
 
@@ -182,30 +215,25 @@ createApp({
                 return;
             }
 
-            // Recommended size for Firebase: smaller images
-            const recommendedSize = useFirebase ? 200 * 1024 : 5 * 1024 * 1024; // 200KB for Firebase, 5MB for local
             const maxSize = 5 * 1024 * 1024; // 5MB absolute max
 
             // Process each file
-            Array.from(files).forEach((file) => {
+            for (const file of Array.from(files)) {
                 // Check file size
                 if (file.size > maxSize) {
                     alert(`Image "${file.name}" is larger than 5MB and will be skipped`);
-                    return;
+                    continue;
                 }
 
-                // Warn about large files when using Firebase
-                if (useFirebase && file.size > recommendedSize) {
-                    const sizeMB = (file.size / 1024 / 1024).toFixed(2);
-                    console.warn(`Image "${file.name}" (${sizeMB}MB) may cause issues with Firebase. Consider using smaller images.`);
+                try {
+                    // Compress image automatically
+                    const compressedImage = await this.compressImage(file, 800, 0.7);
+                    this.form.images.push(compressedImage);
+                } catch (error) {
+                    console.error(`Error processing image "${file.name}":`, error);
+                    alert(`Error processing image "${file.name}". Please try again.`);
                 }
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.form.images.push(e.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
+            }
 
             // Clear the input so the same file can be selected again
             event.target.value = '';
