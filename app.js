@@ -52,16 +52,19 @@ createApp({
     },
     computed: {
         filteredRestaurants() {
-            let filtered = this.restaurants;
-
-            // Filter by cuisine if selected
-            if (this.selectedCuisine) {
-                filtered = filtered.filter(restaurant =>
-                    restaurant.cuisine.toLowerCase() === this.selectedCuisine.toLowerCase()
-                );
+            // Only show restaurants when a category is selected
+            if (!this.selectedCuisine) {
+                return [];
             }
 
-            // Filter by search query
+            let filtered = this.restaurants;
+
+            // Filter by cuisine
+            filtered = filtered.filter(restaurant =>
+                restaurant.cuisine.toLowerCase() === this.selectedCuisine.toLowerCase()
+            );
+
+            // Filter by search query if present
             if (this.searchQuery) {
                 const query = this.searchQuery.toLowerCase();
                 filtered = filtered.filter(restaurant => {

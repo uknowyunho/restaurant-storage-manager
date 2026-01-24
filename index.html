@@ -199,7 +199,9 @@
                 </div>
 
                 <div v-if="filteredRestaurants.length === 0" class="empty-state">
-                    <p>{{ searchQuery ? 'No restaurants found.' : 'No restaurants added yet. Add your first restaurant above!' }}</p>
+                    <p v-if="!selectedCuisine">Please select a category above to view restaurants</p>
+                    <p v-else-if="searchQuery">No restaurants found for your search</p>
+                    <p v-else>No {{ selectedCuisine }} restaurants found. Add one above!</p>
                 </div>
 
                 <div class="restaurant-grid" :class="{ 'list-view': selectedCuisine }">
