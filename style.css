@@ -139,13 +139,13 @@ header p {
 
 .image-count {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 0;
+    left: 0;
     background: #667eea;
     color: white;
     font-size: 0.7rem;
     padding: 2px 6px;
-    border-radius: 10px;
+    border-radius: 8px 0 8px 0;
     font-weight: 600;
 }
 
