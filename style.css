@@ -353,6 +353,12 @@ header p {
     max-width: 100%;
 }
 
+/* List View (when category is selected) */
+.restaurant-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
 .restaurant-card {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 12px;
@@ -367,6 +373,47 @@ header p {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     border-color: #667eea;
+}
+
+/* List View Card Style */
+.restaurant-grid.list-view .restaurant-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    padding: 15px;
+}
+
+.restaurant-grid.list-view .card-images-gallery {
+    margin: 0;
+    width: 200px;
+    height: 150px;
+    grid-column: 1;
+    grid-row: 1 / -1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.restaurant-grid.list-view .card-images-gallery .card-image:first-child:last-child {
+    border-radius: 8px;
+}
+
+.restaurant-grid.list-view .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.restaurant-grid.list-view .card-header {
+    margin-bottom: 5px;
+}
+
+.restaurant-grid.list-view .card-body {
+    margin-bottom: 10px;
+}
+
+.restaurant-grid.list-view .card-actions {
+    padding-top: 10px;
+    margin-top: auto;
 }
 
 .card-images-gallery {
@@ -587,6 +634,26 @@ header p {
     .cuisine-filter-btn {
         font-size: 0.85rem;
         padding: 6px 12px;
+    }
+
+    /* List View on Mobile */
+    .restaurant-grid.list-view .restaurant-card {
+        grid-template-columns: 100px 1fr;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .restaurant-grid.list-view .card-images-gallery {
+        width: 100px;
+        height: 100px;
+    }
+
+    .restaurant-grid.list-view .card-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .restaurant-grid.list-view .info-row {
+        font-size: 0.85rem;
     }
 }
 
