@@ -223,6 +223,16 @@ createApp({
             if (stored) {
                 try {
                     this.restaurants = JSON.parse(stored);
+                    // Backward compatibility: convert old 'image' field to 'images' array
+                    this.restaurants = this.restaurants.map(restaurant => {
+                        if (restaurant.image && !restaurant.images) {
+                            restaurant.images = [restaurant.image];
+                            delete restaurant.image;
+                        } else if (!restaurant.images) {
+                            restaurant.images = [];
+                        }
+                        return restaurant;
+                    });
                 } catch (e) {
                     console.error('Error loading restaurants from localStorage:', e);
                     this.restaurants = [];
@@ -245,6 +255,15 @@ createApp({
                     // Prevent duplicates by checking ID
                     if (!seenIds.has(data.id)) {
                         seenIds.add(data.id);
+
+                        // Backward compatibility: convert old 'image' field to 'images' array
+                        if (data.image && !data.images) {
+                            data.images = [data.image];
+                            delete data.image;
+                        } else if (!data.images) {
+                            data.images = [];
+                        }
+
                         restaurants.push(data);
                     }
                 });
