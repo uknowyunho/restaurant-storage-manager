@@ -36,13 +36,17 @@
                         </div>
                         <div class="form-group">
                             <label for="cuisine">Cuisine Type *</label>
-                            <input
-                                type="text"
+                            <select
                                 id="cuisine"
                                 v-model="form.cuisine"
-                                placeholder="e.g., Italian, Chinese, Mexican"
                                 required
                             >
+                                <option value="">Select cuisine type</option>
+                                <option value="Chinese">🥡 Chinese</option>
+                                <option value="Korean">🍜 Korean</option>
+                                <option value="Western">🍔 Western</option>
+                                <option value="Japanese">🍱 Japanese</option>
+                            </select>
                         </div>
                     </div>
 
