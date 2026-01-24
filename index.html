@@ -204,7 +204,7 @@
                     <p v-else>No {{ selectedCuisine }} restaurants found. Add one above!</p>
                 </div>
 
-                <div class="restaurant-grid" :class="{ 'list-view': selectedCuisine }">
+                <div class="restaurant-grid" :class="{ 'list-view': selectedCuisine || searchQuery }">
                     <div
                         v-for="restaurant in filteredRestaurants"
                         :key="restaurant.id"
