@@ -371,6 +371,7 @@ header p {
     border: 2px solid transparent;
     max-width: 100%;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .restaurant-card:hover {

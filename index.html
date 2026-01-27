@@ -209,10 +209,11 @@
                         v-for="restaurant in filteredRestaurants"
                         :key="restaurant.id"
                         class="restaurant-card"
+                        @click="editRestaurant(restaurant)"
                     >
                         <div v-if="restaurant.images && restaurant.images.length > 0" class="card-images-gallery">
                             <div v-for="(image, index) in restaurant.images" :key="index" class="card-image">
-                                <img :src="image" :alt="restaurant.name" @click="openLightbox(image)" style="cursor: pointer;">
+                                <img :src="image" :alt="restaurant.name" @click.stop="openLightbox(image)" style="cursor: pointer;">
                             </div>
                         </div>
 
@@ -248,13 +249,13 @@
                             <div class="card-actions">
                                 <button
                                     class="btn btn-small btn-edit"
-                                    @click="editRestaurant(restaurant)"
+                                    @click.stop="editRestaurant(restaurant)"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     class="btn btn-small btn-delete"
-                                    @click="deleteRestaurant(restaurant.id)"
+                                    @click.stop="deleteRestaurant(restaurant.id)"
                                 >
                                     Delete
                                 </button>
