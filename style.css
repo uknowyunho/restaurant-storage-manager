@@ -357,9 +357,10 @@ header p {
 .restaurant-grid.list-view {
     grid-template-columns: 1fr;
     gap: 15px;
-    max-height: 600px;
+    max-height: 250px;
     overflow-y: auto;
     padding-right: 10px;
+    scroll-snap-type: y mandatory;
 }
 
 .restaurant-card {
@@ -384,6 +385,7 @@ header p {
     grid-template-columns: 200px 1fr;
     gap: 20px;
     padding: 15px;
+    scroll-snap-align: start;
 }
 
 .restaurant-grid.list-view .card-images-gallery {
@@ -641,7 +643,7 @@ header p {
 
     /* List View on Mobile */
     .restaurant-grid.list-view {
-        max-height: 500px;
+        max-height: 200px;
         padding-right: 5px;
     }
 
