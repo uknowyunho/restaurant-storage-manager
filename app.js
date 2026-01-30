@@ -47,7 +47,8 @@ createApp({
             selectedCuisine: '',
             unsubscribe: null,
             showLightbox: false,
-            lightboxImage: ''
+            lightboxImage: '',
+            todaysRecommendation: null
         };
     },
     computed: {
@@ -332,6 +333,17 @@ createApp({
             if (this.restaurants.length === 0) return 'N/A';
             const budget = this.restaurants.filter(r => r.priceRange === '$');
             return budget.length > 0 ? `${budget.length} options` : 'N/A';
+        },
+        getRandomRecommendation() {
+            if (this.restaurants.length === 0) {
+                alert('Please add some restaurants first!');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * this.restaurants.length);
+            this.todaysRecommendation = this.restaurants[randomIndex];
+        },
+        clearRecommendation() {
+            this.todaysRecommendation = null;
         },
         saveToLocalStorage() {
             localStorage.setItem('restaurants', JSON.stringify(this.restaurants));

@@ -183,6 +183,36 @@
                             <div class="stat-label">🍴 Other</div>
                         </div>
                     </div>
+
+                    <div class="recommendation-section">
+                        <h3>Today's Lunch Recommendation</h3>
+                        <div v-if="!todaysRecommendation" class="recommendation-empty">
+                            <p>🎲 Click the button to get a random restaurant recommendation!</p>
+                            <button class="btn btn-primary" @click="getRandomRecommendation">
+                                Get Recommendation
+                            </button>
+                        </div>
+                        <div v-else class="recommendation-card">
+                            <div class="recommendation-header">
+                                <h4>{{ todaysRecommendation.name }}</h4>
+                                <span class="cuisine-badge">{{ todaysRecommendation.cuisine }}</span>
+                            </div>
+                            <div class="recommendation-details">
+                                <p v-if="todaysRecommendation.address">📍 {{ todaysRecommendation.address }}</p>
+                                <p v-if="todaysRecommendation.phone">📞 {{ todaysRecommendation.phone }}</p>
+                                <p v-if="todaysRecommendation.rating">⭐ {{ getStars(todaysRecommendation.rating) }} ({{ todaysRecommendation.rating }}/5)</p>
+                                <p v-if="todaysRecommendation.priceRange">💰 {{ todaysRecommendation.priceRange }}</p>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="btn btn-small btn-primary" @click="getRandomRecommendation">
+                                    Pick Another
+                                </button>
+                                <button class="btn btn-small btn-secondary" @click="clearRecommendation">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-section">
                     <h2>Quick Info</h2>

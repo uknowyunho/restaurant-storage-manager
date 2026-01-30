@@ -143,6 +143,84 @@ header p {
     min-width: 150px;
 }
 
+/* Recommendation Section */
+.recommendation-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.recommendation-section h3 {
+    color: #667eea;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.recommendation-empty {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    border: 2px dashed #667eea;
+}
+
+.recommendation-empty p {
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 1rem;
+}
+
+.recommendation-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.recommendation-header h4 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.recommendation-header .cuisine-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.recommendation-details {
+    margin-bottom: 15px;
+}
+
+.recommendation-details p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.recommendation-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.recommendation-actions .btn {
+    flex: 1;
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -678,6 +756,27 @@ header p {
     .quick-info-content strong {
         min-width: 120px;
         font-size: 0.9rem;
+    }
+
+    .recommendation-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .recommendation-header h4 {
+        font-size: 1.2rem;
+    }
+
+    .recommendation-header .cuisine-badge {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+
+    .recommendation-details p {
+        font-size: 0.85rem;
+    }
+
+    .recommendation-actions {
+        flex-direction: column;
     }
 
     .list-section {
