@@ -306,6 +306,33 @@ createApp({
         getStars(rating) {
             return '⭐'.repeat(parseInt(rating));
         },
+        getCuisineCount(cuisine) {
+            return this.restaurants.filter(r => r.cuisine === cuisine).length;
+        },
+        getHighestRated() {
+            if (this.restaurants.length === 0) return 'N/A';
+            const highest = this.restaurants.reduce((max, r) => {
+                const rating = parseInt(r.rating) || 0;
+                const maxRating = parseInt(max.rating) || 0;
+                return rating > maxRating ? r : max;
+            }, this.restaurants[0]);
+            return highest.rating ? `${highest.name} (${highest.rating}⭐)` : 'N/A';
+        },
+        getMostExpensive() {
+            if (this.restaurants.length === 0) return 'N/A';
+            const priceOrder = { '$$$$': 4, '$$$': 3, '$$': 2, '$': 1 };
+            const most = this.restaurants.reduce((max, r) => {
+                const priceLevel = priceOrder[r.priceRange] || 0;
+                const maxLevel = priceOrder[max.priceRange] || 0;
+                return priceLevel > maxLevel ? r : max;
+            }, this.restaurants[0]);
+            return most.priceRange ? `${most.name} (${most.priceRange})` : 'N/A';
+        },
+        getBudgetFriendly() {
+            if (this.restaurants.length === 0) return 'N/A';
+            const budget = this.restaurants.filter(r => r.priceRange === '$');
+            return budget.length > 0 ? `${budget.length} options` : 'N/A';
+        },
         saveToLocalStorage() {
             localStorage.setItem('restaurants', JSON.stringify(this.restaurants));
         },

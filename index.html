@@ -20,9 +20,10 @@
 
         <div class="container">
             <!-- Add Restaurant Form -->
-            <div class="form-section">
-                <h2>{{ editingId ? 'Edit Restaurant' : 'Add New Restaurant' }}</h2>
-                <form @submit.prevent="saveRestaurant">
+            <div class="form-swipe-container">
+                <div class="form-section">
+                    <h2>{{ editingId ? 'Edit Restaurant' : 'Add New Restaurant' }}</h2>
+                    <form @submit.prevent="saveRestaurant">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Restaurant Name *</label>
@@ -153,6 +154,44 @@
                         </button>
                     </div>
                 </form>
+                </div>
+                <div class="form-section">
+                    <h2>Statistics</h2>
+                    <div class="stats-content">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ restaurants.length }}</div>
+                            <div class="stat-label">Total Restaurants</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ getCuisineCount('Chinese') }}</div>
+                            <div class="stat-label">🥡 Chinese</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ getCuisineCount('Korean') }}</div>
+                            <div class="stat-label">🍜 Korean</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ getCuisineCount('Western') }}</div>
+                            <div class="stat-label">🍔 Western</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ getCuisineCount('Japanese') }}</div>
+                            <div class="stat-label">🍱 Japanese</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ getCuisineCount('Other') }}</div>
+                            <div class="stat-label">🍴 Other</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h2>Quick Info</h2>
+                    <div class="quick-info-content">
+                        <p><strong>Highest Rated:</strong> {{ getHighestRated() }}</p>
+                        <p><strong>Most Expensive:</strong> {{ getMostExpensive() }}</p>
+                        <p><strong>Budget Friendly:</strong> {{ getBudgetFriendly() }}</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Restaurant List -->
