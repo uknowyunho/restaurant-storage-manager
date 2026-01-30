@@ -16,6 +16,23 @@
         <header>
             <h1>🍽️ Restaurant Storage Manager</h1>
             <p>Manage your favorite restaurants</p>
+            <div class="sync-status">
+                <span v-if="syncStatus === 'firebase'" class="status-badge status-firebase">
+                    ☁️ Firebase Sync Active
+                </span>
+                <span v-else-if="syncStatus === 'local'" class="status-badge status-local">
+                    💾 Local Storage Only
+                </span>
+                <span v-else-if="syncStatus === 'error'" class="status-badge status-error">
+                    ⚠️ Sync Error
+                </span>
+                <span v-else class="status-badge status-checking">
+                    🔄 Checking...
+                </span>
+                <button v-if="syncStatus === 'firebase'" class="btn-sync" @click="manualSync">
+                    Sync Now
+                </button>
+            </div>
         </header>
 
         <div class="container">

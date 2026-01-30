@@ -32,6 +32,62 @@ header h1 {
 header p {
     font-size: 1.1rem;
     opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+/* Sync Status */
+.sync-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-firebase {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+}
+
+.status-local {
+    background: rgba(255, 193, 7, 0.9);
+    color: #333;
+}
+
+.status-error {
+    background: rgba(244, 67, 54, 0.9);
+    color: white;
+}
+
+.status-checking {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-sync {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-sync:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    transform: scale(1.05);
 }
 
 .container {
@@ -696,6 +752,21 @@ header p {
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
+    }
+
+    .sync-status {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .status-badge {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .btn-sync {
+        font-size: 0.8rem;
+        padding: 6px 12px;
     }
 
     .form-row {

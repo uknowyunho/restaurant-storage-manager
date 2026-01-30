@@ -48,7 +48,8 @@ createApp({
             unsubscribe: null,
             showLightbox: false,
             lightboxImage: '',
-            todaysRecommendation: null
+            todaysRecommendation: null,
+            syncStatus: 'checking' // 'checking', 'firebase', 'local', 'error'
         };
     },
     computed: {
@@ -377,11 +378,48 @@ createApp({
                 }
             }
         },
-        setupFirebaseSync() {
+        async manualSync() {
             if (!useFirebase) {
-                this.loadFromLocalStorage();
+                alert('Firebase is not configured. Using localStorage only.');
                 return;
             }
+
+            try {
+                // Try to fetch data from Firebase
+                const snapshot = await db.collection('restaurants').get();
+                const restaurants = [];
+                const seenIds = new Set();
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (!seenIds.has(data.id)) {
+                        seenIds.add(data.id);
+                        if (!data.images) {
+                            data.images = [];
+                        }
+                        restaurants.push(data);
+                    }
+                });
+
+                restaurants.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                this.restaurants = restaurants;
+                this.saveToLocalStorage();
+                alert(`Successfully synced ${restaurants.length} restaurants from Firebase!`);
+            } catch (error) {
+                console.error('Sync error:', error);
+                alert(`Sync failed: ${error.message}`);
+            }
+        },
+        setupFirebaseSync() {
+            if (!useFirebase) {
+                this.syncStatus = 'local';
+                this.loadFromLocalStorage();
+                console.log('Using localStorage only');
+                return;
+            }
+
+            console.log('Setting up Firebase sync...');
+            this.syncStatus = 'firebase';
 
             // Set up real-time listener for Firebase
             this.unsubscribe = db.collection('restaurants').onSnapshot((snapshot) => {
@@ -419,8 +457,11 @@ createApp({
 
                 // Also save to localStorage as backup
                 this.saveToLocalStorage();
+                console.log(`Firebase sync active. Loaded ${restaurants.length} restaurants.`);
             }, (error) => {
                 console.error('Error loading restaurants from Firebase:', error);
+                this.syncStatus = 'error';
+                alert('Firebase sync error. Check your connection and Firebase rules. Using localStorage as fallback.');
                 // Fallback to localStorage
                 this.loadFromLocalStorage();
             });
