@@ -633,13 +633,15 @@ header p {
     }
 
     .cuisine-filters {
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         margin-bottom: 20px;
     }
 
     .cuisine-filter-btn {
-        font-size: 0.85rem;
-        padding: 6px 12px;
+        font-size: 0.75rem;
+        padding: 8px;
+        min-height: 70px;
     }
 
     /* List View on Mobile */
