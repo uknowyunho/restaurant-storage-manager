@@ -135,6 +135,9 @@ header p {
     min-width: 100%;
     scroll-snap-align: start;
     flex-shrink: 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .form-section h2 {
