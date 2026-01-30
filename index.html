@@ -46,6 +46,7 @@
                                 <option value="Korean">🍜 Korean</option>
                                 <option value="Western">🍔 Western</option>
                                 <option value="Japanese">🍱 Japanese</option>
+                                <option value="Thai">🍛 Thai</option>
                             </select>
                         </div>
                     </div>
@@ -195,6 +196,13 @@
                         @click="filterByCuisine('Japanese')"
                     >
                         🍱 Japanese
+                    </button>
+                    <button
+                        class="cuisine-filter-btn"
+                        :class="{ active: selectedCuisine === 'Thai' }"
+                        @click="filterByCuisine('Thai')"
+                    >
+                        🍛 Thai
                     </button>
                 </div>
 
