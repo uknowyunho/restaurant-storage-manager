@@ -813,10 +813,16 @@ header p {
     .stats-content {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        min-height: 280px;
+        align-content: start;
     }
 
     .stat-card {
         padding: 15px;
+        min-height: 85px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .stat-value {
