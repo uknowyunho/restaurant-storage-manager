@@ -812,6 +812,7 @@ header p {
     .form-section {
         padding: 15px;
         max-height: none;
+        height: auto;
         overflow-y: visible;
         min-width: 100%;
         flex-shrink: 0;
