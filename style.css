@@ -804,9 +804,9 @@ header p {
 
     .form-swipe-container {
         margin-bottom: 20px;
-        display: block;
-        overflow-x: visible;
-        scroll-snap-type: none;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
     }
 
     .form-section {
@@ -814,7 +814,7 @@ header p {
         max-height: none;
         overflow-y: visible;
         min-width: 100%;
-        margin-bottom: 20px;
+        flex-shrink: 0;
     }
 
     .stats-content {
