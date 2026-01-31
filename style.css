@@ -819,24 +819,25 @@ header p {
 
     .stats-content {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        gap: 4px;
         align-content: start;
     }
 
     .stat-card {
-        padding: 10px;
-        min-height: 65px;
+        padding: 5px;
+        min-height: 32px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
     .stat-value {
-        font-size: 1.5rem;
+        font-size: 0.75rem;
+        margin-bottom: 2px;
     }
 
     .stat-label {
-        font-size: 0.7rem;
+        font-size: 0.5rem;
     }
 
     .quick-info-content strong {
