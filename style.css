@@ -804,12 +804,17 @@ header p {
 
     .form-swipe-container {
         margin-bottom: 20px;
+        display: block;
+        overflow-x: visible;
+        scroll-snap-type: none;
     }
 
     .form-section {
         padding: 15px;
         max-height: none;
         overflow-y: visible;
+        min-width: 100%;
+        margin-bottom: 20px;
     }
 
     .stats-content {
