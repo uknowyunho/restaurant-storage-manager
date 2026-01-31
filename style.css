@@ -867,6 +867,10 @@ header p {
         flex-direction: column;
     }
 
+    .recommendation-empty {
+        padding: 10px;
+    }
+
     .recommendation-empty .btn {
         padding: 10px 12px;
         font-size: 0.5rem;
