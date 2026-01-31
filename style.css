@@ -808,6 +808,8 @@ header p {
 
     .form-section {
         padding: 15px;
+        max-height: none;
+        overflow-y: visible;
     }
 
     .stats-content {
