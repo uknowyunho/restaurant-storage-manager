@@ -820,16 +820,24 @@ header p {
         overflow-y: visible;
         min-width: 100%;
         flex-shrink: 0;
+        align-self: flex-start;
     }
 
-    /* Statistics section - fit content height */
+    /* Add New Restaurant section - maintain full padding for scrollable content */
+    .form-section:first-child {
+        min-height: 80vh;
+    }
+
+    /* Statistics section - fit content height only */
     .form-section:nth-child(2) {
         padding-bottom: 5px;
+        min-height: auto;
     }
 
-    /* Quick Info section - fit content height */
+    /* Quick Info section - fit content height only */
     .form-section:nth-child(3) {
         padding-bottom: 5px;
+        min-height: auto;
     }
 
     .stats-content {
